@@ -1,9 +1,10 @@
 /**
  * 
  */
-package ConnectNGame_PhaseII;
+package connectNGame_PhaseII;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -102,11 +103,10 @@ public class ConnectNGame {
 	 * @param name2 the name of player 2
 	 * @param who the current player's turn (true for player 1, false for player 2)
 	 * @param board the current board state
-	 * @param move the last move to have been made
 	 * @param wi the WinChecker object
 	 */
 	public ConnectNGame(int ro, int col, int con, String name1, String name2,
-			boolean who, char[][] board, int[] move, WinChecker wi, boolean undo) {
+						boolean who, char[][] board, WinChecker wi, boolean undo) {
 		rows = ro;
 		columns = col;
 		numConnect = con;
@@ -275,7 +275,7 @@ public class ConnectNGame {
 
 	/**
 	 * Gets if the player can undo a move
-	 * @return
+	 * @return true if can undo, false if cannot
 	 */
 	public boolean getUndo() {
 		return canUndo;
@@ -287,11 +287,10 @@ public class ConnectNGame {
 	private void createGameBoard() {
 		canUndo = false;
 		gameBoard = new char[rows][columns];
-		for (int ro = 0; ro < gameBoard.length; ro++) {
-			for (int col = 0; col < gameBoard[ro].length; col++) {
-				gameBoard[ro][col] = 'E';
-			} // for every element
-		} // for every row
+        for (char[] chars : gameBoard) {
+            // for every element
+            Arrays.fill(chars, 'E');
+        } // for every row
 	} // createGameBoard()
 
 	/**
@@ -358,28 +357,27 @@ public class ConnectNGame {
 	 */
 	public void saveGame() throws IOException {
 		FileWriter gameSave = new FileWriter(SAVED_GAME);
-		gameSave.write(String.valueOf(rows) + "\n" + String.valueOf(columns) + "\n"
-				+ String.valueOf(numConnect) + "\n" + player1 + "\n" + player2 + "\n");
+		gameSave.write(rows + "\n" + columns + "\n"
+				+ numConnect + "\n" + player1 + "\n" + player2 + "\n");
 		if (player1Turn) // if player1's turn
 			gameSave.append("1");
 		else // if player2's turn
 			gameSave.append("2");
-		for (int ro = 0; ro < gameBoard.length; ro++) {
-			gameSave.append("\n");
-			for (int col = 0; col < gameBoard[ro].length; col++) {
-				if (col == gameBoard[ro].length - 1)
-					gameSave.append(String.valueOf(gameBoard[ro][col]));
-				else
-					gameSave.append(String.valueOf(gameBoard[ro][col]) + "~");
-			} // for every column
-		} // for every row
+        for (char[] chars : gameBoard) {
+            gameSave.append("\n");
+            for (int col = 0; col < chars.length; col++) {
+                if (col == chars.length - 1)
+                    gameSave.append(String.valueOf(chars[col]));
+                else
+                    gameSave.append(String.valueOf(chars[col])).append("~");
+            } // for every column
+        } // for every row
 		gameSave.close();
 	} // saveGame()
 
 	/**
 	 * Drops a token down the specified column's index
 	 * @param col the index of the column to drop a token
-	 * @return 0 for valid,<br>-1 for invalid,<br>-2 for full column
 	 */
 	public void takeTurn(int col) {
 		for (int ro = gameBoard.length - 1; ro >= 0; ro--) { // for every row
@@ -388,20 +386,17 @@ public class ConnectNGame {
 				lastMove[1] = col;
 				if (player1Turn) { // if player 1
 					gameBoard[ro][col] = PLAYER_CHARACTERS[0];
-					player1Turn = !player1Turn;
-					canUndo = true;
-					return;
-				} // if player 1
+					player1Turn = false;
+                } // if player 1
 				else { // if player 2
 					gameBoard[ro][col] = PLAYER_CHARACTERS[1];
-					player1Turn = !player1Turn;
-					canUndo = true;
-					return;
-				} // if player 2
-			} // if empty
+					player1Turn = true;
+                } // if player 2
+                canUndo = true;
+                return;
+            } // if empty
 		} // for every rows
-		return;
-	} // takeTurn(int)
+    } // takeTurn(int)
 
 	/**
 	 * Checks for a win in the game board using the last move

@@ -1,4 +1,4 @@
-package ConnectNGame_PhaseII;
+package connectNGame_PhaseII;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -476,7 +476,7 @@ public class ConnectNFrame extends JFrame {
             } // if a string
             return; // end method
         } // catch if row not a number
-		if (!ValidateConnectNGame.validateNumRowsCols(row)) { // check if row valid
+		if (ValidateConnectNGame.validateNumRowsCols(row)) { // check if row valid
 			JOptionPane.showMessageDialog(this,
 					String.format("%s\n%s", "Rows must be between 4 and 12",
 							"Please reenter the number of rows."),
@@ -505,7 +505,7 @@ public class ConnectNFrame extends JFrame {
                 }
                 return; // end method
             } // catch column not a number
-			if (!ValidateConnectNGame.validateNumRowsCols(column)) { // check column number
+			if (ValidateConnectNGame.validateNumRowsCols(column)) { // check column number
 				JOptionPane.showMessageDialog(this,
 						String.format("%s\n%s", "Columns must be between 4 and 12",
 								"Please reenter the number of columns."),
@@ -536,7 +536,7 @@ public class ConnectNFrame extends JFrame {
                     }
                     return; // end method
                 } // catch not a number
-				if (!ValidateConnectNGame.validateConnectNumber(numConnect, row,
+				if (ValidateConnectNGame.validateConnectNumber(numConnect, row,
 						column)) { // check numConnect
 					JOptionPane.showMessageDialog(this, String.format("%s\n%s",
 							"Number of tokens must be between 3 and 8, and only as large as rows or columns",
@@ -546,7 +546,7 @@ public class ConnectNFrame extends JFrame {
                     // end method
                 } // if numConnect is invalid
 				else
-					if (!ValidateConnectNGame.checkName(fldPlayer1.getText())) { // check player1
+					if (ValidateConnectNGame.checkName(fldPlayer1.getText())) { // check player1
 						JOptionPane.showMessageDialog(this,
 								String.format("%s\n%s", "Player 1 name is empty",
 										"Please enter player 1's name."),
@@ -555,7 +555,7 @@ public class ConnectNFrame extends JFrame {
                         // end method
                     } // if player1 is empty
 					else
-						if (!ValidateConnectNGame.checkName(fldPlayer2.getText())) { // check player2
+						if (ValidateConnectNGame.checkName(fldPlayer2.getText())) { // check player2
 							JOptionPane.showMessageDialog(this,
 									String.format("%s\n%s", "Player 2 name is empty",
 											"Please enter player 2's name."),

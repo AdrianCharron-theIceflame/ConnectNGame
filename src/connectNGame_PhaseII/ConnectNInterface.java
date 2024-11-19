@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ConnectNGame_PhaseII;
+package connectNGame_PhaseII;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -271,7 +271,7 @@ public class ConnectNInterface {
 				} // do nothing
 			} // while rows == 0 and tempVal != 'Q'
 		} // catch conversion error
-		while (!ValidateConnectNGame.validateNumRowsCols(rows)) {
+		while (ValidateConnectNGame.validateNumRowsCols(rows)) {
 			System.err.println("Invalid number of rows");
 			System.out
 					.print("Please enter a number of rows (4 to 12), or 'Q' to exit: ");
@@ -307,7 +307,7 @@ public class ConnectNInterface {
 				} // do nothing
 			} // while columns == 0 and tempVal != 'Q'
 		} // catch conversion error
-		while (!ValidateConnectNGame.validateNumRowsCols(columns)) {
+		while (ValidateConnectNGame.validateNumRowsCols(columns)) {
 			System.err.println("Invalid number of columns");
 			System.out.print(
 					"Please enter a number of columns (4 to 12), or 'Q' to exit: ");
@@ -344,7 +344,7 @@ public class ConnectNInterface {
 				} // do nothing
 			} // while numConnect == 0 and tempVal != 'Q'
 		} // catch conversion error
-		while (!ValidateConnectNGame.validateConnectNumber(numConnect, rows,
+		while (ValidateConnectNGame.validateConnectNumber(numConnect, rows,
 				columns)) {
 			System.err.println("Invalid number of tokens");
 			System.out.print(
@@ -363,7 +363,7 @@ public class ConnectNInterface {
 		String player1;
 		System.out.print("What is player 1's name: ");
 		player1 = KEYBOARD.nextLine();
-				while(!ValidateConnectNGame.checkName(player1)) {
+				while(ValidateConnectNGame.checkName(player1)) {
 					System.err.println("Player 1's name is empty.");
 					System.out.print("Please enter player 1's name: ");
 					player1 = KEYBOARD.nextLine();
@@ -373,7 +373,7 @@ public class ConnectNInterface {
 		String player2;
 		System.out.print("What is player 2's name: ");
 		player2 = KEYBOARD.nextLine();
-				while(!ValidateConnectNGame.checkName(player2)) {
+				while(ValidateConnectNGame.checkName(player2)) {
 					System.err.println("Player 2's name is empty.");
 					System.out.print("Please enter player 2's name: ");
 					player2 = KEYBOARD.nextLine();

@@ -1,10 +1,11 @@
-package ConnectNGame_PhaseII;
+package connectNGame_PhaseII;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.io.Serial;
 
 /**
  * <p>Course: 420-G20 Programming II</p>
@@ -14,13 +15,10 @@ import java.awt.Insets;
  */
 public class ConnectNFrame_About extends JPanel {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
-	private JLabel lblTitle;
-	private JLabel lblCreator;
-	private JLabel lblYear;
-	private JLabel lblCollege;
 
-	/**
+    /**
 	 * Create the panel.
 	 */
 	public ConnectNFrame_About() {
@@ -32,28 +30,28 @@ public class ConnectNFrame_About extends JPanel {
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
-		lblTitle = new JLabel("Connect N Game & Frame");
+        JLabel lblTitle = new JLabel("Connect N Game & Frame");
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
 		gbc_lblTitle.insets = new Insets(0, 0, 5, 0);
 		gbc_lblTitle.gridx = 0;
 		gbc_lblTitle.gridy = 0;
 		add(lblTitle, gbc_lblTitle);
 
-		lblCreator = new JLabel("Adrian Charron");
+        JLabel lblCreator = new JLabel("Adrian Charron");
 		GridBagConstraints gbc_lblCreator = new GridBagConstraints();
 		gbc_lblCreator.insets = new Insets(0, 0, 5, 0);
 		gbc_lblCreator.gridx = 0;
 		gbc_lblCreator.gridy = 1;
 		add(lblCreator, gbc_lblCreator);
 
-		lblYear = new JLabel("2024");
+        JLabel lblYear = new JLabel("2024");
 		GridBagConstraints gbc_lblYear = new GridBagConstraints();
 		gbc_lblYear.insets = new Insets(0, 0, 5, 0);
 		gbc_lblYear.gridx = 0;
 		gbc_lblYear.gridy = 2;
 		add(lblYear, gbc_lblYear);
 
-		lblCollege = new JLabel("Cégep Heritage College");
+        JLabel lblCollege = new JLabel("Cégep Heritage College");
 		GridBagConstraints gbc_lblCollege = new GridBagConstraints();
 		gbc_lblCollege.gridx = 0;
 		gbc_lblCollege.gridy = 3;

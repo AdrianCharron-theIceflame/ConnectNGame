@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ConnectNGame_PhaseII;
+package connectNGame_PhaseII;
 
 /**
  * <p>Course: 420-G20 Programming II</p>
@@ -14,53 +14,35 @@ public class WinChecker {
 	private char[][] board;
 	private int[] move;
 	private int numConnect;
-	private boolean isFinished = false;
-	
-	public void setBoard(char[][] newBoard) {
-		board = newBoard;
-	}
-	
-	/**
-	 * Gets the isFinished state
-	 * @return false if the game is ongoing,<br>true is the game has ended
-	 */
-	public boolean getIsFinished() {
-		return isFinished;
-	} // getIsFinsihed()
 
-	/**
+    /**
 	 * Checks for a win with the last move dropped
-	 * @param gameboard the current state of the game board
+	 * @param gameBoard the current state of the game board
 	 * @param lastMove the last move to be played
 	 * @param num the number of tokens to be connected to win
 	 * @return 0 for no win,<br>1 for row win,<br>2 for column win,<br>3 for upper left win,<br>4 for upper right win,<br>5 for a tie.
 	 */
-	public int checkForWin(char[][] gameboard, int[] lastMove, int num) {
-		board = gameboard;
+	public int checkForWin(char[][] gameBoard, int[] lastMove, int num) {
+		board = gameBoard;
 		move = lastMove;
 		numConnect = num;
 		if (board[move[0]][move[1]] == ConnectNGame.PLAYER_CHARACTERS[2]) {
 			return 0;
 		}
-		if (checkRowWin()) {
-			isFinished = true;
-			return 1;
+        if (checkRowWin()) {
+            return 1;
 		}
 		if (checkColumnWin()) {
-			isFinished = true;
-			return 2;
+            return 2;
 		}
 		if (checkUpperLeftDiagonal()) {
-			isFinished = true;
-			return 3;
+            return 3;
 		}
 		if (checkUpperRightDiagonal()) {
-			isFinished = true;
-			return 4;
+            return 4;
 		}
 		if (checkTie()) {
-			isFinished = true;
-			return 5;
+            return 5;
 		}
 		return 0;
 	} // checkForWins(char[][], int[], int)
