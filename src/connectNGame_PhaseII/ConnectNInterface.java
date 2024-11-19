@@ -1,7 +1,7 @@
 /**
  * 
  */
-package connectNGame_PhaseII;
+package ConnectNGame_PhaseII;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -17,9 +17,6 @@ public class ConnectNInterface {
 	private static ConnectNGame game;
 	private static final Scanner KEYBOARD = new Scanner(System.in);
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		// 					1					2					3					4					5					6					7					8
 		// 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567
@@ -61,11 +58,10 @@ public class ConnectNInterface {
 		do {
 			column = -1; // an illegal column
 			action = 'x'; // an illegal action
-			input = ""; // reset the input
-			while (column == -1) { // while column is at -1
+            while (column == -1) { // while column is at -1
 				System.out.println("\nCurrent Game Board:");
 				displayGameBoard(); // display the game board
-				displayWhosTurn(); // display who's turn it is
+				displayWhoseTurn(); // display whose turn it is
 				System.out.print("Enter a column number (1 to " + game.getColumns()
 						+ "),\n'U' to undo,\n'S' to save,\nor 'Q' to quit: "); // display the options of the game
 				input = KEYBOARD.next(); // read the input from the user
@@ -133,14 +129,14 @@ public class ConnectNInterface {
 			break;
 		default: // if something else somehow gets returned
 			System.err.println(
-					"An unknown error occured! Please contact customer support!!");
+					"An unknown error occurred! Please contact customer support!!");
 			KEYBOARD.close();
 			System.exit(-3);
 		} // end of switch code block
 	} // declareWinner()
 
 	/**
-	 * Selects the method for the inputed character
+	 * Selects the method for the inputted character
 	 * @param action U,S,Q to undo, save, and quit respectively
 	 */
 	private static void takeAction(char action) {
@@ -159,7 +155,7 @@ public class ConnectNInterface {
 			break;
 		default: // if an unknown is passed into the method
 			System.err.println(
-					"\nAn unknown error occured! Please contact customer support!!");
+					"\nAn unknown error occurred! Please contact customer support!!");
 			KEYBOARD.close();
 			System.exit(-1);
 		} // end of switch
@@ -193,7 +189,7 @@ public class ConnectNInterface {
 		for (int i = 0; i < 87; i++)
 			System.out.print("-");
 		System.out.println();
-		char action = KEYBOARD.next().toUpperCase().charAt(0); // the action inputed by the user
+		char action = KEYBOARD.next().toUpperCase().charAt(0); // the action inputted by the user
 		while (!(action == 'N' || action == 'L' || action == 'Q'
 				|| action == 'H')) { // if the char doesn't match
 			System.out.print("Please enter 'N', 'L', or 'Q'");
@@ -215,7 +211,7 @@ public class ConnectNInterface {
 			break;
 		default: // if the char doesn't match
 			System.err.println(
-					"An unknown error occured! Please contact customer support!!");
+					"An unknown error occurred! Please contact customer support!!");
 			KEYBOARD.close();
 			System.exit(-2);
 		} // end of switch
@@ -395,22 +391,22 @@ public class ConnectNInterface {
 	private static void displayGameBoard() {
 		for (int i = 0; i < game.getGameBoard().length; i++) {
 			for (int j = 0; j < game.getGameBoard()[i].length; j++) {
-				System.out.print(String.valueOf(game.getGameBoard()[i][j]) + " ");
+				System.out.print(game.getGameBoard()[i][j] + " ");
 			} // for columns
 			System.out.println();
 		} // for rows
 	} // displayGameBoard()
 
 	/**
-	 * Displays who's turn it is
+	 * Displays whose turn it is
 	 */
-	private static void displayWhosTurn() {
+	private static void displayWhoseTurn() {
 		if (game.getPlayer1Turn()) { // if player 1's turn
 			System.out.println(game.getPlayer1() + "'s turn!");
 		} // if player 2's turn
 		else
 			System.out.println(game.getPlayer2() + "'s turn!");
-	} // displayWhosTurn()
+	} // displayWhoseTurn()
 
 	/**
 	 * Loads the game saved in currentGame.txt
@@ -423,7 +419,7 @@ public class ConnectNInterface {
 		}
 		catch (IOException e) {
 			System.err.println(
-					"An unexpected error occured\nSaved game cannot be reached.");
+					"An unexpected error occurred\nSaved game cannot be reached.");
 			displayOptions();
 		}
 		switch (state) {
@@ -476,7 +472,7 @@ public class ConnectNInterface {
 			break;
 		default: // unknown value
 			System.err.println(
-					"An unexpected error occured.\nCannot load game from save file.");
+					"An unexpected error occurred.\nCannot load game from save file.");
 		} // end switch
 		// display options again to create new game or exit.
 		displayOptions();

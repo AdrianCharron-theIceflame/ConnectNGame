@@ -1,7 +1,7 @@
 /**
  * 
  */
-package connectNGame_PhaseII;
+package ConnectNGame_PhaseII;
 
 import java.io.*;
 import java.util.Scanner;

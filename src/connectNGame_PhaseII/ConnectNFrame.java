@@ -1,6 +1,5 @@
-package connectNGame_PhaseII;
+package ConnectNGame_PhaseII;
 
-import java.awt.EventQueue;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.*;
@@ -13,6 +12,9 @@ import java.awt.Insets;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.io.Serial;
+
+import static java.awt.EventQueue.invokeLater;
 
 /**
  * <p>Course: 420-G20 Programming II</p>
@@ -22,64 +24,34 @@ import java.awt.Color;
  */
 public class ConnectNFrame extends JFrame {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JMenuBar menuBar;
-	private JMenu fileMenu;
-	private JMenuItem exitMenuItem;
-	private JRadioButton[] columnChoices;
-	private JMenuItem newGameMenuItem;
-	private JMenu openMenu;
-	private JMenuItem loadMenuItem;
-	private JMenuItem saveMenuItem;
-	private JMenu helpMenu;
-	private JMenuItem rulesMenuItem;
-	private JMenuItem aboutMenuItem;
-	private JPanel pnlPlayers;
-	private JLabel lblCurrentPlayer;
-	private JLabel lblPlayer1;
-	private JLabel lblPlayer1Name;
-	private JLabel lblPlayerName;
-	private JLabel lblPlayer2;
-	private JLabel lblPlayer2Name;
-	private JPanel pnlTitle;
-	private JLabel lblTitle;
-	private JButton btnDropToken;
-	private JButton btnUndo;
-	private JPanel pnlButtons;
-	private JPanel pnlGameBoard;
-	private JPanel pnlGameInfo;
-	private JLabel lblRowInfo;
-	private JLabel lblColumnsInfo;
-	private JLabel lblNumColumns;
-	private JLabel lblNumRows;
+	private final JPanel contentPane;
+    private JRadioButton[] columnChoices;
+    private final JMenuItem saveMenuItem;
+    private final JLabel lblPlayer1Name;
+	private final JLabel lblPlayerName;
+    private final JLabel lblPlayer2Name;
+    private final JButton btnDropToken;
+	private final JButton btnUndo;
+    private final JPanel pnlGameBoard;
+    private final JLabel lblNumColumns;
+	private final JLabel lblNumRows;
 	private ConnectNGame game;
-	private JLabel lblSpacer;
-	private ButtonGroup columnButtonGroup;
-	private JButton[][] gameBoard;
-	private JLabel lblConnect;
-	private JLabel lblNumConnect;
-	private JLabel lblInputRows;
-	private JLabel lblInputColumns;
-	private JLabel lblInputNumConnect;
-	private JTextField fldColumns;
+    private JButton[][] gameBoard;
+    private final JLabel lblNumConnect;
+    private JTextField fldColumns;
 	private JTextField fldRows;
 	private JTextField fldNumConnect;
-	private JLabel lblSpacer2;
-	private JLabel lblSpacer3;
-	private JLabel lblNewGame;
-	private JLabel lblInputPlayer1;
-	private JTextField fldPlayer1;
-	private JLabel lblInputPlayer2;
-	private JTextField fldPlayer2;
-	private JButton btnCreateNewGame;
-	//	private J
+    private JTextField fldPlayer1;
+    private JTextField fldPlayer2;
+    //	private J
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		invokeLater(new Runnable() {
 			public void run() {
 				try {
 					ConnectNFrame frame = new ConnectNFrame();
@@ -106,66 +78,44 @@ public class ConnectNFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1012, 563);
 
-		menuBar = new JMenuBar();
+        JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		fileMenu = new JMenu("File");
+        JMenu fileMenu = new JMenu("File");
 		menuBar.add(fileMenu);
 
-		exitMenuItem = new JMenuItem("Exit");
-		exitMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				displayGoodbyeMessage();
-				System.exit(0);
-			}
-		});
+        JMenuItem exitMenuItem = new JMenuItem("Exit");
+		exitMenuItem.addActionListener(_ -> {
+            displayGoodbyeMessage();
+            System.exit(0);
+        });
 
-		newGameMenuItem = new JMenuItem("New Game");
-		newGameMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionPerformed_newGameMenuItem();
-			}
-		});
+        JMenuItem newGameMenuItem = new JMenuItem("New Game");
+		newGameMenuItem.addActionListener(_ -> actionPerformed_newGameMenuItem());
 		fileMenu.add(newGameMenuItem);
 
 		saveMenuItem = new JMenuItem("Save Game");
-		saveMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionPerformed_saveMenuItem();
-			}
-		});
+		saveMenuItem.addActionListener(_ -> actionPerformed_saveMenuItem());
 		saveMenuItem.setEnabled(false);
 		fileMenu.add(saveMenuItem);
 		fileMenu.add(exitMenuItem);
 
-		openMenu = new JMenu("Open");
+        JMenu openMenu = new JMenu("Open");
 		menuBar.add(openMenu);
 
-		loadMenuItem = new JMenuItem("Load Game");
-		loadMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionPerformed_loadMenuItem();
-			}
-		});
+        JMenuItem loadMenuItem = new JMenuItem("Load Game");
+		loadMenuItem.addActionListener(_ -> actionPerformed_loadMenuItem());
 		openMenu.add(loadMenuItem);
 
-		helpMenu = new JMenu("Help");
+        JMenu helpMenu = new JMenu("Help");
 		menuBar.add(helpMenu);
 
-		rulesMenuItem = new JMenuItem("Game Rules");
-		rulesMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionPerformed_rulesMenuItem();
-			}
-		});
+        JMenuItem rulesMenuItem = new JMenuItem("Game Rules");
+		rulesMenuItem.addActionListener(_ -> actionPerformed_rulesMenuItem());
 		helpMenu.add(rulesMenuItem);
 
-		aboutMenuItem = new JMenuItem("About");
-		aboutMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionPerformed_aboutMenuItem();
-			}
-		});
+        JMenuItem aboutMenuItem = new JMenuItem("About");
+		aboutMenuItem.addActionListener(_ -> actionPerformed_aboutMenuItem());
 		helpMenu.add(aboutMenuItem);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -173,39 +123,31 @@ public class ConnectNFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
-		pnlButtons = new JPanel();
+        JPanel pnlButtons = new JPanel();
 		pnlButtons.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.add(pnlButtons, BorderLayout.SOUTH);
 		pnlButtons.setLayout(new GridLayout(0, 5, 0, 0));
 
-		lblSpacer = new JLabel("");
+        JLabel lblSpacer = new JLabel("");
 		pnlButtons.add(lblSpacer);
 
 		btnUndo = new JButton("Undo");
-		btnUndo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionPerformed_btnUndo();
-			}
-		});
+		btnUndo.addActionListener(_ -> actionPerformed_btnUndo());
 		btnUndo.setEnabled(false);
 		pnlButtons.add(btnUndo);
 
 		btnDropToken = new JButton("Drop Token");
 		btnDropToken.setEnabled(false);
-		btnDropToken.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionPerformed_btnDropToken();
-			}
-		});
+		btnDropToken.addActionListener(_ -> actionPerformed_btnDropToken());
 
-		lblSpacer2 = new JLabel("");
+        JLabel lblSpacer2 = new JLabel("");
 		pnlButtons.add(lblSpacer2);
 		pnlButtons.add(btnDropToken);
 
-		lblSpacer3 = new JLabel("");
+        JLabel lblSpacer3 = new JLabel("");
 		pnlButtons.add(lblSpacer3);
 
-		pnlPlayers = new JPanel();
+        JPanel pnlPlayers = new JPanel();
 		pnlPlayers.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.add(pnlPlayers, BorderLayout.WEST);
 		GridBagLayout gbl_pnlPlayers = new GridBagLayout();
@@ -216,7 +158,7 @@ public class ConnectNFrame extends JFrame {
 				Double.MIN_VALUE };
 		pnlPlayers.setLayout(gbl_pnlPlayers);
 
-		lblCurrentPlayer = new JLabel("  Current Player: ");
+        JLabel lblCurrentPlayer = new JLabel("  Current Player: ");
 		GridBagConstraints gbc_lblCurrentPlayer = new GridBagConstraints();
 		gbc_lblCurrentPlayer.anchor = GridBagConstraints.EAST;
 		gbc_lblCurrentPlayer.fill = GridBagConstraints.VERTICAL;
@@ -233,7 +175,7 @@ public class ConnectNFrame extends JFrame {
 		gbc_lblPlayerName.gridy = 0;
 		pnlPlayers.add(lblPlayerName, gbc_lblPlayerName);
 
-		lblPlayer1 = new JLabel("Yellow Player: ");
+        JLabel lblPlayer1 = new JLabel("Yellow Player: ");
 		GridBagConstraints gbc_lblPlayer1 = new GridBagConstraints();
 		gbc_lblPlayer1.anchor = GridBagConstraints.EAST;
 		gbc_lblPlayer1.fill = GridBagConstraints.VERTICAL;
@@ -250,7 +192,7 @@ public class ConnectNFrame extends JFrame {
 		gbc_lblPlayer1Name.gridy = 1;
 		pnlPlayers.add(lblPlayer1Name, gbc_lblPlayer1Name);
 
-		lblPlayer2 = new JLabel("Red Player: ");
+        JLabel lblPlayer2 = new JLabel("Red Player: ");
 		GridBagConstraints gbc_lblPlayer2 = new GridBagConstraints();
 		gbc_lblPlayer2.anchor = GridBagConstraints.EAST;
 		gbc_lblPlayer2.fill = GridBagConstraints.VERTICAL;
@@ -266,12 +208,12 @@ public class ConnectNFrame extends JFrame {
 		gbc_lblPlayer2Name.gridy = 2;
 		pnlPlayers.add(lblPlayer2Name, gbc_lblPlayer2Name);
 
-		pnlTitle = new JPanel();
+        JPanel pnlTitle = new JPanel();
 		pnlTitle.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.add(pnlTitle, BorderLayout.NORTH);
 		pnlTitle.setLayout(new GridLayout(0, 1, 0, 0));
 
-		lblTitle = new JLabel("Connect N");
+        JLabel lblTitle = new JLabel("Connect N");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setFont(new Font("Arial Black", Font.BOLD, 20));
 		pnlTitle.add(lblTitle);
@@ -280,7 +222,7 @@ public class ConnectNFrame extends JFrame {
 		pnlGameBoard.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.add(pnlGameBoard, BorderLayout.CENTER);
 
-		pnlGameInfo = new JPanel();
+        JPanel pnlGameInfo = new JPanel();
 		pnlGameInfo.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.add(pnlGameInfo, BorderLayout.EAST);
 		GridBagLayout gbl_pnlGameInfo = new GridBagLayout();
@@ -291,7 +233,7 @@ public class ConnectNFrame extends JFrame {
 				Double.MIN_VALUE };
 		pnlGameInfo.setLayout(gbl_pnlGameInfo);
 
-		lblRowInfo = new JLabel("Rows: ");
+        JLabel lblRowInfo = new JLabel("Rows: ");
 		GridBagConstraints gbc_lblRowInfo = new GridBagConstraints();
 		gbc_lblRowInfo.anchor = GridBagConstraints.EAST;
 		gbc_lblRowInfo.fill = GridBagConstraints.VERTICAL;
@@ -309,7 +251,7 @@ public class ConnectNFrame extends JFrame {
 		gbc_lblNumRows.gridy = 0;
 		pnlGameInfo.add(lblNumRows, gbc_lblNumRows);
 
-		lblColumnsInfo = new JLabel("Columns: ");
+        JLabel lblColumnsInfo = new JLabel("Columns: ");
 		GridBagConstraints gbc_lblColumnsInfo = new GridBagConstraints();
 		gbc_lblColumnsInfo.anchor = GridBagConstraints.EAST;
 		gbc_lblColumnsInfo.fill = GridBagConstraints.VERTICAL;
@@ -327,7 +269,7 @@ public class ConnectNFrame extends JFrame {
 		gbc_lblNumColumns.gridy = 1;
 		pnlGameInfo.add(lblNumColumns, gbc_lblNumColumns);
 
-		lblConnect = new JLabel("  Tokens to Connect: ");
+        JLabel lblConnect = new JLabel("  Tokens to Connect: ");
 		GridBagConstraints gbc_lblConnect = new GridBagConstraints();
 		gbc_lblConnect.insets = new Insets(0, 0, 0, 5);
 		gbc_lblConnect.gridx = 0;
@@ -348,14 +290,14 @@ public class ConnectNFrame extends JFrame {
 	 * Action performed upon clicking the load menu item
 	 */
 	private void actionPerformed_loadMenuItem() {
-		int error = -11;
+		int error;
 		game = new ConnectNGame();
 		try { // try loading the game
 			error = game.loadGameBoard();
 		}
 		catch (IOException e) { // catch the thrown exception
 			JOptionPane.showMessageDialog(this,
-					"An unknown error occured while loading the game. Please contact customer support or create a new game.",
+					"An unknown error occurred while loading the game. Please contact customer support or create a new game.",
 					"Unknown Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
@@ -419,7 +361,7 @@ public class ConnectNFrame extends JFrame {
 			break;
 		default: // unknown number
 			JOptionPane.showMessageDialog(this,
-					"An unknown error occured. Please contact customer support if the problem is persists.",
+					"An unknown error occurred. Please contact customer support if the problem is persists.",
 					"Unknown Error", JOptionPane.ERROR_MESSAGE);
 		} // switch (error state)
 	} // loadGame()
@@ -434,7 +376,7 @@ public class ConnectNFrame extends JFrame {
 		columnChoices = new JRadioButton[game.getColumns()];
 		gameBoard = new JButton[game.getRows()][game.getColumns()];
 		pnlGameBoard.setLayout(new GridLayout(0, game.getColumns(), 0, 0));
-		columnButtonGroup = new ButtonGroup();
+        ButtonGroup columnButtonGroup = new ButtonGroup();
 		for (int but = 0; but < columnChoices.length; but++) {
 			columnChoices[but] = new JRadioButton();
 			columnChoices[but].setHorizontalAlignment(SwingConstants.CENTER);
@@ -469,7 +411,7 @@ public class ConnectNFrame extends JFrame {
 		lblNumConnect.setText(String.valueOf(game.getNumConnect()));
 		lblPlayer1Name.setText(game.getPlayer1());
 		lblPlayer2Name.setText(game.getPlayer2());
-		// set who's turn
+		// set whose turn
 		if (game.getPlayer1Turn()) {
 			lblPlayerName.setText(game.getPlayer1());
 		} // if player1's turn
@@ -496,7 +438,7 @@ public class ConnectNFrame extends JFrame {
 		} // if column is invalid
 		else // column valid
 			if (ValidateConnectNGame.validateTokenDropped(index,
-					game.getGameBoard()) == -2) // token dropped a a full column
+					game.getGameBoard()) == -2) // token dropped a full column
 				JOptionPane.showMessageDialog(this,
 						"Column is full. Please select a different column", "Column Full",
 						JOptionPane.ERROR_MESSAGE); // error message
@@ -514,78 +456,76 @@ public class ConnectNFrame extends JFrame {
 	private void actionPerformed_btnCreateNewGame() {
 		// declare variables for use
 		int row, column, numConnect;
-		row = 99;
-		try { // try to convert txt fld to number
+        try { // try to convert txt fld to number
 			row = Integer.parseInt(fldRows.getText());
 		}
 		catch (NumberFormatException r) { // catch not a number
-			if (fldRows.getText().length() <= 0) {
+            // end method
+            if (fldRows.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(this,
 						String.format("%s\n%s", "The rows field is empty",
 								"Please enter the number of rows."),
 						"Rows Empty", JOptionPane.ERROR_MESSAGE); // error message
-				return; // end method
-			} // if empty
+            } // if empty
 			else {
 				JOptionPane.showMessageDialog(this,
 						String.format("%s\n%s", "Rows can only be a number.",
 								"Please reenter the number of rows."),
 						"Rows Not A Number", JOptionPane.ERROR_MESSAGE); // error message
 				fldRows.setText(""); // remove text
-				return; // end method
-			} // if a string
-		} // catch if row not a number
+            } // if a string
+            return; // end method
+        } // catch if row not a number
 		if (!ValidateConnectNGame.validateNumRowsCols(row)) { // check if row valid
 			JOptionPane.showMessageDialog(this,
 					String.format("%s\n%s", "Rows must be between 4 and 12",
 							"Please reenter the number of rows."),
 					"Invalid Number of Rows", JOptionPane.ERROR_MESSAGE); // error message
 			fldRows.setText(""); // remove txt
-			return; // end method
-		} // if row not valid
+            // end method
+        } // if row not valid
 		else { // once row is valid
-			column = 99;
-			try { // try to convert txt fld to number
+            try { // try to convert txt fld to number
 				column = Integer.parseInt(fldColumns.getText());
 			}
 			catch (NumberFormatException c) { // catch column not a number
-				if (fldColumns.getText().length() <= 0) {
+                // end method
+                if (fldColumns.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(this,
 							String.format("%s\n%s", "The columns field is empty",
 									"Please enter the number of columns."),
 							"Columns Empty", JOptionPane.ERROR_MESSAGE); // error message
-					return; // end method
-				} // if empty
+                } // if empty
 				else {
 					JOptionPane.showMessageDialog(this,
 							String.format("%s\n%s", "Columns can only be a number.",
 									"Please reenter the number of columns."),
 							"Columns Not A Number", JOptionPane.ERROR_MESSAGE); // error message
 					fldColumns.setText(""); // remove text
-					return; // end method
-				}
-			} // catch column not a number
+                }
+                return; // end method
+            } // catch column not a number
 			if (!ValidateConnectNGame.validateNumRowsCols(column)) { // check column number
 				JOptionPane.showMessageDialog(this,
 						String.format("%s\n%s", "Columns must be between 4 and 12",
 								"Please reenter the number of columns."),
 						"Invalid Number of Columns", JOptionPane.ERROR_MESSAGE); // error message
 				fldColumns.setText(""); // remove txt
-				return; // end method
-			} // if column invalid
+                // end method
+            } // if column invalid
 			else { // once column is valid
-				numConnect = 99; // instantiate numConnect
-				try { // try to convert txt field to number
+                // instantiate numConnect
+                try { // try to convert txt field to number
 					numConnect = Integer.parseInt(fldNumConnect.getText());
 				}
 				catch (NumberFormatException n) { // catch not a number
-					if (fldNumConnect.getText().length() <= 0) {
+                    // end method
+                    if (fldNumConnect.getText().isEmpty()) {
 						JOptionPane.showMessageDialog(this,
 								String.format("%s\n%s", "The number of tokens field is empty",
 										"Please enter the number of tokens to connect to win."),
 								"Number of Tokens Empty", JOptionPane.ERROR_MESSAGE); // error message
-						return; // end method
-					} // if empty
+                    } // if empty
 					else {
 						JOptionPane.showMessageDialog(this,
 								String.format("%s\n%s",
@@ -593,9 +533,9 @@ public class ConnectNFrame extends JFrame {
 										"Please reenter the number of number of tokens."),
 								"Number of Tokens Not A Number", JOptionPane.ERROR_MESSAGE); // error message
 						fldNumConnect.setText(""); // remove txt from field
-						return; // end method
-					}
-				} // catch not a number
+                    }
+                    return; // end method
+                } // catch not a number
 				if (!ValidateConnectNGame.validateConnectNumber(numConnect, row,
 						column)) { // check numConnect
 					JOptionPane.showMessageDialog(this, String.format("%s\n%s",
@@ -603,8 +543,8 @@ public class ConnectNFrame extends JFrame {
 							"Please reenter the number of number of tokens."),
 							"Invalid Number of Number of Tokens", JOptionPane.ERROR_MESSAGE); // error message
 					fldNumConnect.setText(""); // remove txt from field
-					return; // end method
-				} // if numConnect is invalid
+                    // end method
+                } // if numConnect is invalid
 				else
 					if (!ValidateConnectNGame.checkName(fldPlayer1.getText())) { // check player1
 						JOptionPane.showMessageDialog(this,
@@ -612,8 +552,8 @@ public class ConnectNFrame extends JFrame {
 										"Please enter player 1's name."),
 								"Empty Player 1 Name", JOptionPane.ERROR_MESSAGE); // error message
 						fldPlayer1.setText("");
-						return; // end method
-					} // if player1 is empty
+                        // end method
+                    } // if player1 is empty
 					else
 						if (!ValidateConnectNGame.checkName(fldPlayer2.getText())) { // check player2
 							JOptionPane.showMessageDialog(this,
@@ -621,8 +561,8 @@ public class ConnectNFrame extends JFrame {
 											"Please enter player 2's name."),
 									"Empty Player 2 Name", JOptionPane.ERROR_MESSAGE); // Error message
 							fldPlayer2.setText("");
-							return; // end method
-						} // if player2 is empty
+                            // end method
+                        } // if player2 is empty
 						else {
 							game = new ConnectNGame(row, column, numConnect,
 									fldPlayer1.getText(), fldPlayer2.getText()); // game creation
@@ -639,7 +579,7 @@ public class ConnectNFrame extends JFrame {
 	 * Checks the game board for a win, and shows a message if game over
 	 */
 	private void checkForWin() {
-		String player = "Player";
+		String player;
 		if (game.getPlayer1Turn()) {
 			player = game.getPlayer2();
 		} // if winner is player2
@@ -675,9 +615,9 @@ public class ConnectNFrame extends JFrame {
 		saveMenuItem.setEnabled(false); // cannot save a game that is over
 		btnDropToken.setEnabled(false); // if win, cannot drop token
 		btnUndo.setEnabled(false); // if win, cannot undo
-		for (int i = 0; i < columnChoices.length; i++) {
-			columnChoices[i].setEnabled(false);
-		} // if game over, disable radio buttons
+        for (JRadioButton columnChoice : columnChoices) {
+            columnChoice.setEnabled(false);
+        } // if game over, disable radio buttons
 	} // checkForWin()
 
 	/**
@@ -734,7 +674,7 @@ public class ConnectNFrame extends JFrame {
 		pnlGameBoard.setLayout(gbl_pnlGameBoard);
 
 		// newGame lbl
-		lblNewGame = new JLabel("New Game");
+        JLabel lblNewGame = new JLabel("New Game");
 		lblNewGame.setFont(new Font("Arial Black", Font.BOLD, 15));
 		GridBagConstraints gbc_lblNewGame = new GridBagConstraints();
 		gbc_lblNewGame.anchor = GridBagConstraints.NORTH;
@@ -745,7 +685,7 @@ public class ConnectNFrame extends JFrame {
 		pnlGameBoard.add(lblNewGame, gbc_lblNewGame);
 
 		// rows lbl
-		lblInputRows = new JLabel("Number of rows: ");
+        JLabel lblInputRows = new JLabel("Number of rows: ");
 		GridBagConstraints gbc_lblInputRows = new GridBagConstraints();
 		gbc_lblInputRows.anchor = GridBagConstraints.EAST;
 		gbc_lblInputRows.insets = new Insets(0, 0, 5, 5);
@@ -764,7 +704,7 @@ public class ConnectNFrame extends JFrame {
 		fldRows.setColumns(10);
 
 		// columns lbl
-		lblInputColumns = new JLabel("Number of columns: ");
+        JLabel lblInputColumns = new JLabel("Number of columns: ");
 		GridBagConstraints gbc_lblInputColumns = new GridBagConstraints();
 		gbc_lblInputColumns.insets = new Insets(0, 0, 5, 5);
 		gbc_lblInputColumns.anchor = GridBagConstraints.EAST;
@@ -783,7 +723,7 @@ public class ConnectNFrame extends JFrame {
 		fldColumns.setColumns(10);
 
 		// numConnect lbl
-		lblInputNumConnect = new JLabel("  Number of tokens to connect: ");
+        JLabel lblInputNumConnect = new JLabel("  Number of tokens to connect: ");
 		GridBagConstraints gbc_lblInputNumConnect = new GridBagConstraints();
 		gbc_lblInputNumConnect.anchor = GridBagConstraints.SOUTHEAST;
 		gbc_lblInputNumConnect.insets = new Insets(0, 0, 5, 5);
@@ -802,7 +742,7 @@ public class ConnectNFrame extends JFrame {
 		fldNumConnect.setColumns(10);
 
 		// player1 lbl
-		lblInputPlayer1 = new JLabel("Player 1 name: ");
+        JLabel lblInputPlayer1 = new JLabel("Player 1 name: ");
 		GridBagConstraints gbc_lblInputPlayer1 = new GridBagConstraints();
 		gbc_lblInputPlayer1.anchor = GridBagConstraints.SOUTHEAST;
 		gbc_lblInputPlayer1.insets = new Insets(0, 0, 5, 5);
@@ -821,7 +761,7 @@ public class ConnectNFrame extends JFrame {
 		fldPlayer1.setColumns(10);
 
 		// player2 lbl
-		lblInputPlayer2 = new JLabel("Player 2 name: ");
+        JLabel lblInputPlayer2 = new JLabel("Player 2 name: ");
 		GridBagConstraints gbc_lblInputPlayer2 = new GridBagConstraints();
 		gbc_lblInputPlayer2.anchor = GridBagConstraints.SOUTHEAST;
 		gbc_lblInputPlayer2.insets = new Insets(0, 0, 5, 5);
@@ -840,12 +780,8 @@ public class ConnectNFrame extends JFrame {
 		fldPlayer2.setColumns(10);
 
 		// Create new game button
-		btnCreateNewGame = new JButton("Create New Game!");
-		btnCreateNewGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionPerformed_btnCreateNewGame();
-			}
-		});
+        JButton btnCreateNewGame = new JButton("Create New Game!");
+		btnCreateNewGame.addActionListener(_ -> actionPerformed_btnCreateNewGame());
 		GridBagConstraints gbc_btnCreateNewGame = new GridBagConstraints();
 		gbc_btnCreateNewGame.gridwidth = 5;
 		gbc_btnCreateNewGame.gridx = 0;
@@ -881,7 +817,7 @@ public class ConnectNFrame extends JFrame {
 	 */
 	private void actionPerformed_aboutMenuItem() {
 		JOptionPane.showMessageDialog(this, new ConnectNFrame_About(), "About",
-				JOptionPane.PLAIN_MESSAGE); // creates an about panel with the about JPanel
+				JOptionPane.PLAIN_MESSAGE); // creates an about-panel with the about JPanel
 	} // actionPerformed_aboutMenuItem()
 
 	/**

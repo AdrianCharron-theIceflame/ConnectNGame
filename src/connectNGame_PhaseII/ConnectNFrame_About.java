@@ -1,4 +1,4 @@
-package connectNGame_PhaseII;
+package ConnectNGame_PhaseII;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;

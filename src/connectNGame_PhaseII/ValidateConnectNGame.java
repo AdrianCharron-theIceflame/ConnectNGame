@@ -1,7 +1,7 @@
 /**
  * 
  */
-package connectNGame_PhaseII;
+package ConnectNGame_PhaseII;
 
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;

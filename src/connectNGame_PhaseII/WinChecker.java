@@ -1,7 +1,7 @@
 /**
  * 
  */
-package connectNGame_PhaseII;
+package ConnectNGame_PhaseII;
 
 /**
  * <p>Course: 420-G20 Programming II</p>
